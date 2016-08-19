@@ -1,0 +1,22 @@
+{{$TypeName := .TypeName}}
+{{$Name := .Name}}
+struct {{initialCap .Name}}{{goType .Definition}}
+{{range .Definition.Links}}
+struct {{.Method}}{{initialCap $Name}}Request: {{initialCap $TypeName}} {
+    typealias Response = {{initialCap $Name}}
+
+    var method: HTTPMethod {
+        return {{printf ".%s" .Method}}
+    }
+
+    var path: String {
+        return "{{.HRef}}"
+    }
+
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
+        guard let dictionary = object as? [String: AnyObject], let rateLimit = RateLimit(dictionary: dictionary) else {
+            throw ResponseError.UnexpectedObject(object)
+        }
+        return rateLimit
+    }
+}{{end}}

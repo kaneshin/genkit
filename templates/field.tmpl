@@ -1,0 +1,3 @@
+{{if .Struct}}struct {{initialCap .Name}}{{.Type}}
+let {{.Name}}: {{initialCap .Name}}?
+{{else}}let {{.Name}}: {{.Type}}{{end}}

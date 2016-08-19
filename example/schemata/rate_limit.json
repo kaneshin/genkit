@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "RateLimit",
+  "description": "Get your current rate limit status",
+  "stability": "prototype",
+  "strictProperties": true,
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "id": {
+      "description": "",
+      "readOnly": true,
+      "type": ["integer"]
+    },
+    "limit": {
+      "description": "",
+      "readOnly": true,
+      "type": ["integer"]
+    },
+    "remaining": {
+      "description": "",
+      "readOnly": true,
+      "type": ["integer"]
+    },
+    "reset": {
+      "description": "",
+      "readOnly": true,
+      "type": ["integer"]
+    },
+    "rate" :{
+      "description": "",
+      "readOnly": true,
+      "properties": {
+        "limit": {
+          "$ref": "/schemata/rate_limit#/definitions/limit"
+        },
+        "remaining": {
+          "$ref": "/schemata/rate_limit#/definitions/remaining"
+        },
+        "reset": {
+          "$ref": "/schemata/rate_limit#/definitions/reset"
+        }
+      },
+      "type": ["object"]
+    },
+    "identity": {
+      "anyOf": [
+        {
+          "$ref": "/schemata/rate_limit#/definitions/id"
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "description": "",
+      "href": "/rate_limit",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    }
+  ],
+  "properties": {
+    "resources": {
+      "description": "",
+      "readOnly": true,
+      "properties": {
+        "core": {
+          "$ref": "/schemata/rate_limit#/definitions/rate"
+        },
+        "search": {
+          "$ref": "/schemata/rate_limit#/definitions/rate"
+        }
+      },
+      "type": ["object"]
+    },
+    "rate": {
+      "$ref": "/schemata/rate_limit#/definitions/rate"
+    }
+  },
+  "id": "schemata/rate_limit"
+}

@@ -1,0 +1,9 @@
+protocol {{initialCap .TypeName}}: RequestType {
+}
+
+extension {{initialCap .TypeName}} {
+    var baseURL: NSURL {
+        return NSURL(string: "{{.URL}}")!
+    }
+}
+

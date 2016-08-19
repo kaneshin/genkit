@@ -1,0 +1,11 @@
+init?(dictionary: [String: AnyObject]) {
+{{range $name, $type := .Elements}}{{if eq "" $type}}    guard let {{$name}} = dictionary["{{$name}}"] as? [String: AnyObject] else {
+        return nil
+    }
+    self.{{$name}} = {{initialCap $name}}(dictionary: {{$name}})
+{{else}}    guard let {{$name}} = dictionary["{{$name}}"] as? {{$type}} else {
+        return nil
+    }
+    self.{{$name}} = {{$name}}
+{{end}}{{end}}
+}

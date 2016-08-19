@@ -1,0 +1,26 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'rake'
+require 'prmd/rake_tasks/combine'
+require 'prmd/rake_tasks/verify'
+require 'prmd/rake_tasks/doc'
+require 'prmd/link'
+
+namespace :genkit do
+  Prmd::RakeTasks::Combine.new do |t|
+    t.options[:meta] = 'meta.json'
+    t.paths << 'schemata'
+    t.output_file = 'api.json'
+  end
+
+  Prmd::RakeTasks::Verify.new do |t|
+    t.files << 'api.json'
+  end
+
+  Prmd::RakeTasks::Doc.new do |t|
+    t.files = { 'api.json' => 'api.md' }
+  end
+end
+
+task default: [:genkit]
+task genkit: ['genkit:combine', 'genkit:verify', 'genkit:doc']

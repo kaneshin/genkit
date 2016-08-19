@@ -1,0 +1,10 @@
+{
+ "description": "GitHub API",
+ "id": "GitHub",
+ "links": [{
+   "href": "https://api.github.com",
+   "rel": "self"
+ }],
+ "version": "0.1.0",
+ "title": "GitHub"
+}
